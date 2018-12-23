@@ -15,7 +15,5 @@ http://5c167fa4e6694800138963d4.mockapi.io/api/v1/cart/item?search=availableSize
 
 PROMOCODE
 http://5c167fa4e6694800138963d4.mockapi.io/api/v1/cart/promocode/PROMO01
-
 http://5c167fa4e6694800138963d4.mockapi.io/api/v1/cart/promocode/PROMO02
-
 http://5c167fa4e6694800138963d4.mockapi.io/api/v1/cart/promocode/PROMO03
