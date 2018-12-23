@@ -1,0 +1,12 @@
+.grid {
+  padding-top: 5px;
+}
+.row {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.noborder {
+  border: 0;
+  cursor: pointer;
+}
