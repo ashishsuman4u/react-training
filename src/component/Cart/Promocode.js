@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import classNames from "classnames";
 import ThemeContext from "../../context/ThemeContext";
 
 class Promocode extends Component {
@@ -48,13 +49,18 @@ class Promocode extends Component {
               placeholder="e.g. ABC123"
             />
             <button
-              className={
-                this.props.isFetching
-                  ? "ui loading disabled button"
-                  : this.state.code !== "" && this.props.grandTotal > 0
-                  ? `ui ${this.context.theme} button`
-                  : "ui disabled button"
-              }
+              className={classNames(
+                "ui",
+                {
+                  loading: this.props.isFetching,
+                  disabled:
+                    this.props.isFetching ||
+                    !(this.state.code !== "" && this.props.grandTotal > 0),
+                  [`${this.context.theme}`]:
+                    this.state.code !== "" && this.props.grandTotal > 0
+                },
+                "button"
+              )}
               onClick={() => {
                 this.props.checkPromocodeFromApi(this.state.code);
               }}>

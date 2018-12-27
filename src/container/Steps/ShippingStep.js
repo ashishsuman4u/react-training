@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
+import classNames from "classnames";
 import { connect } from "react-redux";
 
 import renderStep from "../../component/shared/renderStep";
@@ -9,6 +10,16 @@ const stepDetails = {
   nextStep: 3,
   address: {}
 };
+
+const fields = [
+  { name: "name", label: "Name" },
+  { name: "address1", label: "Address line 1" },
+  { name: "address2", label: "Address line 2" },
+  { name: "city", label: "City" },
+  { name: "state", label: "State" },
+  { name: "country", label: "Country" },
+  { name: "pin", label: "Pin Code" }
+];
 
 class ShippingStep extends Component {
   static contextType = ThemeContext;
@@ -20,7 +31,8 @@ class ShippingStep extends Component {
 
   renderField({ input, type, label, meta }) {
     return (
-      <div className={meta.touched && meta.error ? "error field" : "field"}>
+      <div
+        className={classNames({ error: meta.touched && meta.error }, "field")}>
         <label>{label}</label>
         <input {...input} type={type} />
       </div>
@@ -35,48 +47,17 @@ class ShippingStep extends Component {
             <div className="ui form segment">
               <h2>Shipping Address</h2>
               <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <Field
-                  name="name"
-                  label="Name"
-                  type="text"
-                  component={this.renderField}
-                />
-                <Field
-                  name="address1"
-                  label="Address line 1"
-                  type="text"
-                  component={this.renderField}
-                />
-                <Field
-                  name="address2"
-                  label="Address line 2"
-                  type="text"
-                  component={this.renderField}
-                />
-                <Field
-                  name="city"
-                  label="City"
-                  type="text"
-                  component={this.renderField}
-                />
-                <Field
-                  name="state"
-                  label="State"
-                  type="text"
-                  component={this.renderField}
-                />
-                <Field
-                  name="country"
-                  label="Country"
-                  type="text"
-                  component={this.renderField}
-                />
-                <Field
-                  name="pin"
-                  label="Pin code"
-                  type="text"
-                  component={this.renderField}
-                />
+                {fields.map(field => {
+                  return (
+                    <Field
+                      key={field.name}
+                      name={field.name}
+                      label={field.label}
+                      type="text"
+                      component={this.renderField}
+                    />
+                  );
+                })}
                 <div>
                   <button className={`ui ${this.context.theme} button`}>
                     Continue to Confirm Order

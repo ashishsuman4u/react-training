@@ -9,34 +9,27 @@ const productSuccessMessage = (
   pageSize,
   sortDirection,
   filterBySize
-) => {
-  return Object.assign({}, payload, {
-    pageIndex,
-    pageSize,
-    sortDirection,
-    filterBySize
-  });
-};
+) => ({
+  ...payload,
+  pageIndex,
+  pageSize,
+  sortDirection,
+  filterBySize
+});
 
-export const fetchProductsStart = () => {
-  return {
-    type: actionTypes.FETCH_PRODUCTS_START
-  };
-};
+export const fetchProductsStart = () => ({
+  type: actionTypes.FETCH_PRODUCTS_START
+});
 
-export const fetchProductSuccess = payload => {
-  return {
-    type: actionTypes.FETCH_PRODUCTS_SUCCESS,
-    payload
-  };
-};
+export const fetchProductSuccess = payload => ({
+  type: actionTypes.FETCH_PRODUCTS_SUCCESS,
+  payload
+});
 
-export const fetchProductError = error => {
-  return {
-    type: actionTypes.FETCH_PRODUCTS_ERROR,
-    error
-  };
-};
+export const fetchProductError = error => ({
+  type: actionTypes.FETCH_PRODUCTS_ERROR,
+  error
+});
 
 export const updateCurrentIndex = (
   pageIndex,

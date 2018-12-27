@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 
+import * as selector from "../../component/Cart/reselectCalculation";
 import {
   increaseItemCount,
   decreaseItemCount,
@@ -13,13 +14,6 @@ import PaymentSection from "../../component/Cart/PaymentSection";
 import CartItem from "../../component/Cart/CartItem";
 
 const stepDetails = {
-  billing: {
-    totalItemPrice: 0,
-    totalDeliveryCharges: 0,
-    subTotal: 0,
-    promoDiscount: 0,
-    grandTotal: 0
-  },
   nextStep: 2
 };
 
@@ -60,10 +54,10 @@ class CartStep extends Component {
         <div className="six wide column">
           <PaymentSection
             checkPromocodeFromApi={this.checkPromocodeFromApi}
-            products={this.props.products}
             cart={this.props.cart}
             stepDetails={stepDetails}
             nextStep={this.props.nextStep}
+            billing={this.props.billing}
           />
         </div>
       </div>
@@ -106,7 +100,15 @@ function renderCartItems(
 function mapStateToProps(state) {
   return {
     products: state.products,
-    cart: state.cart
+    cart: state.cart,
+    billing: {
+      totalItemPrice: selector.totalItemPriceSelector(state),
+      totalDeliveryCharges: selector.totalDeliveryChargesSelector(state),
+      subTotal: selector.subTotalSelector(state),
+      promoDiscount: selector.promoDiscountSelector(state),
+      grandTotal: selector.grandTotalSelector(state),
+      currencyFormat: selector.currencyFormatSelector(state)
+    }
   };
 }
 

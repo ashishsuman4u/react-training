@@ -5,7 +5,6 @@ import * as actionType from "../action/type";
 const initialState = {
   items: [],
   promocode: {},
-  billing: {},
   address: {}
 };
 
@@ -42,8 +41,6 @@ const CartReducer = (state = initialState, action) => {
       return { ...state, isFetching: false, promocode: action.payload };
     case actionType.CHECK_PROMOCODE_ERROR:
       return { ...state, isFetching: false, error: action.error };
-    case actionType.PROCEED_TO_SHIPPING:
-      return { ...state, billing: action.billing };
     case actionType.PROCEED_TO_CONFIRM:
       return { ...state, address: action.address };
     default:

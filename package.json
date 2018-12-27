@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "lodash": "^4.17.11",
@@ -16,7 +17,8 @@
     "redux": "^4.0.1",
     "redux-form": "^8.0.4",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

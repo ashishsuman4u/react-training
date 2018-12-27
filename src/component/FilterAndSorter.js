@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import classNames from "classnames";
 
 import ThemeContext from "../context/ThemeContext";
 
@@ -22,79 +23,27 @@ const Filters = ({
                 onClick={() => {
                   changeSelectedSize("");
                 }}
-                className={
-                  filterBySize === ""
-                    ? "ui disabled right floated basic inverted button label"
-                    : "ui right floated basic inverted button label"
-                }>
+                className={classNames(
+                  "ui",
+                  { disabled: filterBySize === "" },
+                  "right floated basic inverted button label"
+                )}>
                 Show All
               </button>
             </div>
             <div className="ui bottom attached segment">
-              <div className="ui equal sized grid">
-                <div className="row">
-                  <div className="four wide column">
-                    {showButton(
-                      "XS",
-                      changeSelectedSize,
-                      filterBySize,
-                      value.theme
-                    )}
-                  </div>
-                  <div className="four wide column">
-                    {showButton(
-                      "S",
-                      changeSelectedSize,
-                      filterBySize,
-                      value.theme
-                    )}
-                  </div>
-                  <div className="four wide column">
-                    {showButton(
-                      "M",
-                      changeSelectedSize,
-                      filterBySize,
-                      value.theme
-                    )}
-                  </div>
-                  <div className="four wide column">
-                    {showButton(
-                      "ML",
-                      changeSelectedSize,
-                      filterBySize,
-                      value.theme
-                    )}
-                  </div>
-                </div>
-                <div className="ui equal sized grid">
-                  <div className="row">
-                    <div className="four wide column">
-                      {showButton(
-                        "L",
-                        changeSelectedSize,
-                        filterBySize,
-                        value.theme
-                      )}
-                    </div>
-                    <div className="four wide column">
-                      {showButton(
-                        "XL",
-                        changeSelectedSize,
-                        filterBySize,
-                        value.theme
-                      )}
-                    </div>
-                    <div className="four wide column">
-                      {showButton(
-                        "XXL",
-                        changeSelectedSize,
-                        filterBySize,
-                        value.theme
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {renderButtonGrid(
+                ["XS", "S", "M", "ML"],
+                changeSelectedSize,
+                filterBySize,
+                value.theme
+              )}
+              {renderButtonGrid(
+                ["L", "XL", "XXL"],
+                changeSelectedSize,
+                filterBySize,
+                value.theme
+              )}
             </div>
             <div
               className={`ui secondary inverted ${
@@ -106,20 +55,18 @@ const Filters = ({
               <div className="ui vertical text menu">
                 <button
                   onClick={() => changeSortDirection("asc")}
-                  className={
-                    sortDirection === "asc"
-                      ? `item basic ${value.theme} button noborder`
-                      : `active item basic ${value.theme} button noborder`
-                  }>
+                  className={classNames(
+                    { active: sortDirection !== "asc" },
+                    `item basic ${value.theme} button noborder`
+                  )}>
                   Low to High
                 </button>
                 <button
                   onClick={() => changeSortDirection("desc")}
-                  className={
-                    sortDirection === "desc"
-                      ? `item basic ${value.theme} button noborder`
-                      : `active item basic ${value.theme} button noborder`
-                  }>
+                  className={classNames(
+                    { active: sortDirection !== "desc" },
+                    `item basic ${value.theme} button noborder`
+                  )}>
                   High to Low
                 </button>
               </div>
@@ -131,17 +78,34 @@ const Filters = ({
   );
 };
 
+function renderButtonGrid(sizeArray, changeSelectedSize, filterBySize, theme) {
+  return (
+    <div className="ui equal sized grid">
+      <div className="row">
+        {sizeArray.map(size => {
+          return (
+            <div className="four wide column" key={size}>
+              {showButton(size, changeSelectedSize, filterBySize, theme)}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function showButton(size, changeSelectedSize, filterBySize, color) {
+  const showDark = filterBySize === size;
   return (
     <button
       onClick={() => {
         changeSelectedSize(size);
       }}
-      className={
-        filterBySize === size
-          ? `ui circular dark ${color} active button`
-          : `ui circular ${color} button`
-      }>
+      className={classNames(
+        "ui circular",
+        { dark: showDark },
+        `${color} active button`
+      )}>
       {size}
     </button>
   );

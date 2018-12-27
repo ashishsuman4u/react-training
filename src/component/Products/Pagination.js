@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 import ThemeContext from "../../context/ThemeContext";
 
 const Pagination = ({ pageIndex, pageSize, totalItem, changePage }) => {
@@ -25,7 +26,10 @@ function getPages(pageIndex, pageSize, totalItem, changePage) {
         to={`/${index}`}
         id={index}
         onClick={changePage}
-        className={pageIndex === index ? "disabled item" : "active item"}>
+        className={classNames(
+          { disabled: pageIndex === index, active: pageIndex !== index },
+          "item"
+        )}>
         {index}
       </Link>
     );

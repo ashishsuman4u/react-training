@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
+import * as selector from "../../component/Cart/reselectCalculation";
 import renderStep from "../../component/shared/renderStep";
 import ShowAddress from "../../component/Address/ShowAddress";
 import Payment from "../../component/Cart/Payment";
@@ -33,13 +34,13 @@ class ConfirmStep extends Component {
   }
 
   renderLoader = () => {
-    const cart = this.props.cart;
+    const { billing } = this.props;
     return (
       <Modal
         title="Checkout"
         description={`Please pay the final amount of ${
-          cart.billing.currencyFormat
-        } ${cart.billing.grandTotal}`}
+          billing.currencyFormat
+        } ${billing.grandTotal}`}
         dismiss={() => {
           return false;
         }}
@@ -55,6 +56,7 @@ class ConfirmStep extends Component {
 
   renderConfirmation = () => {
     const cart = this.props.cart;
+    const { billing } = this.props;
     return (
       <Fragment>
         <div className="ui three column grid">
@@ -70,10 +72,7 @@ class ConfirmStep extends Component {
           <div className="five wide column">
             <div className="ui segment items">
               <div className="ui form">
-                <Payment
-                  itemInCart={cart.items.length}
-                  billing={cart.billing}
-                />
+                <Payment itemInCart={cart.items.length} billing={billing} />
               </div>
             </div>
           </div>
@@ -115,7 +114,15 @@ function mapStateToProps(state) {
       return _.some(state.cart.items, cartItem => {
         return cartItem.id === item.id;
       });
-    })
+    }),
+    billing: {
+      totalItemPrice: selector.totalItemPriceSelector(state),
+      totalDeliveryCharges: selector.totalDeliveryChargesSelector(state),
+      subTotal: selector.subTotalSelector(state),
+      promoDiscount: selector.promoDiscountSelector(state),
+      grandTotal: selector.grandTotalSelector(state),
+      currencyFormat: selector.currencyFormatSelector(state)
+    }
   };
 }
 
