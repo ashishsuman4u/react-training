@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import classNames from "classnames";
+import { PropTypes } from "prop-types";
 
 export default (WrappedItem, showButton) => {
   class RenderCartItem extends Component {
@@ -57,5 +58,14 @@ export default (WrappedItem, showButton) => {
       }
     }
   }
+
+  RenderCartItem.propTypes = {
+    item: PropTypes.object.isRequired,
+    count: PropTypes.number.isRequired,
+    increaseItemCount: PropTypes.func.isRequired,
+    decreaseItemCount: PropTypes.func.isRequired,
+    removeItemFromCart: PropTypes.func.isRequired
+  };
+
   return RenderCartItem;
 };

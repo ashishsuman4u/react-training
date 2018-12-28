@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import _ from "lodash";
+import { PropTypes } from "prop-types";
 
-import * as selector from "../../component/Cart/reselectCalculation";
+import * as selector from "../../selector/cart";
 import {
   increaseItemCount,
   decreaseItemCount,
@@ -65,6 +65,13 @@ class CartStep extends Component {
   }
 }
 
+CartStep.propTypes = {
+  products: PropTypes.object.isRequired,
+  cart: PropTypes.object.isRequired,
+  nextStep: PropTypes.func.isRequired,
+  billing: PropTypes.object.isRequired
+};
+
 function renderCartItems(
   products,
   cart,
@@ -72,8 +79,8 @@ function renderCartItems(
   decreaseItemCount,
   removeItem
 ) {
-  const productList = _.filter(products.items, function(item) {
-    return _.some(cart.items, cartItem => {
+  const productList = products.items.filter(item => {
+    return cart.items.some(cartItem => {
       return cartItem.id === item.id;
     });
   });
@@ -81,7 +88,7 @@ function renderCartItems(
     return <div className="item">No item to show</div>;
   }
   return productList.map(item => {
-    const cartItem = _.find(cart.items, i => {
+    const cartItem = cart.items.find(i => {
       return i.id === item.id;
     });
     return (

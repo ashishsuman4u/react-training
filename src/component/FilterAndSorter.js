@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import classNames from "classnames";
+import { PropTypes } from "prop-types";
 
 import ThemeContext from "../context/ThemeContext";
 
@@ -78,7 +79,19 @@ const Filters = ({
   );
 };
 
-function renderButtonGrid(sizeArray, changeSelectedSize, filterBySize, theme) {
+Filters.propTypes = {
+  filterBySize: PropTypes.string.isRequired,
+  changeSelectedSize: PropTypes.func.isRequired,
+  sortDirection: PropTypes.string.isRequired,
+  changeSortDirection: PropTypes.func.isRequired
+};
+
+const renderButtonGrid = (
+  sizeArray,
+  changeSelectedSize,
+  filterBySize,
+  theme
+) => {
   return (
     <div className="ui equal sized grid">
       <div className="row">
@@ -92,9 +105,9 @@ function renderButtonGrid(sizeArray, changeSelectedSize, filterBySize, theme) {
       </div>
     </div>
   );
-}
+};
 
-function showButton(size, changeSelectedSize, filterBySize, color) {
+const showButton = (size, changeSelectedSize, filterBySize, color) => {
   const showDark = filterBySize === size;
   return (
     <button
@@ -109,6 +122,6 @@ function showButton(size, changeSelectedSize, filterBySize, color) {
       {size}
     </button>
   );
-}
+};
 
 export default Filters;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { PropTypes } from "prop-types";
 
 import { proceedToConfirmStep } from "../../action/cart";
 
@@ -19,5 +20,9 @@ export default WrappedComponent => {
       return <WrappedComponent {...this.props} nextStep={this.nextStep} />;
     }
   }
+  RenderStep.propTypes = {
+    step: PropTypes.number.isRequired,
+    updateStep: PropTypes.func.isRequired
+  };
   return RenderStep;
 };

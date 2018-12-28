@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import classNames from "classnames";
+import { PropTypes } from "prop-types";
 
 import Promocode from "./Promocode";
 import Payment from "./Payment";
@@ -43,6 +44,14 @@ const PaymentSection = ({
       )}
     </ThemeContext.Consumer>
   );
+};
+
+PaymentSection.propTypes = {
+  cart: PropTypes.object.isRequired,
+  checkPromocodeFromApi: PropTypes.func.isRequired,
+  stepDetails: PropTypes.object.isRequired,
+  nextStep: PropTypes.func.isRequired,
+  billing: PropTypes.object.isRequired
 };
 
 export default PaymentSection;

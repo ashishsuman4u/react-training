@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import classNames from "classnames";
+import { PropTypes } from "prop-types";
+
 import ThemeContext from "../../context/ThemeContext";
 
 class Promocode extends Component {
@@ -72,5 +74,9 @@ class Promocode extends Component {
     );
   }
 }
+
+Promocode.propTypes = {
+  grandTotal: PropTypes.number.isRequired
+};
 
 export default Promocode;

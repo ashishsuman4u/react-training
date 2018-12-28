@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { PropTypes } from "prop-types";
+
 import ThemeContext from "../../context/ThemeContext";
 
 const cartButton = (item, isAdded, addItemToCart, theme) => {
@@ -57,6 +59,12 @@ const Card = ({ item, isAdded, addItemToCart }) => {
       )}
     </ThemeContext.Consumer>
   );
+};
+
+Card.propTypes = {
+  item: PropTypes.object.isRequired,
+  isAdded: PropTypes.bool.isRequired,
+  addItemToCart: PropTypes.func.isRequired
 };
 
 export default Card;

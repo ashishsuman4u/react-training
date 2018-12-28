@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { PropTypes } from "prop-types";
 
 const ShowAddress = ({ address }) => {
   return (
@@ -49,4 +50,7 @@ const ShowAddress = ({ address }) => {
   );
 };
 
+ShowAddress.propTypes = {
+  address: PropTypes.object.isRequired
+};
 export default ShowAddress;

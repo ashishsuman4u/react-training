@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import { PropTypes } from "prop-types";
 import ThemeContext from "../../context/ThemeContext";
 
 const Pagination = ({ pageIndex, pageSize, totalItem, changePage }) => {
@@ -15,7 +16,14 @@ const Pagination = ({ pageIndex, pageSize, totalItem, changePage }) => {
   );
 };
 
-function getPages(pageIndex, pageSize, totalItem, changePage) {
+Pagination.propTypes = {
+  pageIndex: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  totalItem: PropTypes.number.isRequired,
+  changePage: PropTypes.func.isRequired
+};
+
+const getPages = (pageIndex, pageSize, totalItem, changePage) => {
   const pages = [];
   const totalPages = Math.ceil(totalItem / pageSize);
   for (let i = 0; i < totalPages; i++) {
@@ -35,6 +43,6 @@ function getPages(pageIndex, pageSize, totalItem, changePage) {
     );
   }
   return pages;
-}
+};
 
 export default Pagination;

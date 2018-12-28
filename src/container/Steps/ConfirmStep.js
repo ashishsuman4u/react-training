@@ -2,8 +2,9 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import _ from "lodash";
+import { PropTypes } from "prop-types";
 
-import * as selector from "../../component/Cart/reselectCalculation";
+import * as selector from "../../selector/cart";
 import renderStep from "../../component/shared/renderStep";
 import ShowAddress from "../../component/Address/ShowAddress";
 import Payment from "../../component/Cart/Payment";
@@ -107,11 +108,17 @@ class ConfirmStep extends Component {
   }
 }
 
+ConfirmStep.propTypes = {
+  cart: PropTypes.object.isRequired,
+  productList: PropTypes.array.isRequired,
+  billing: PropTypes.object.isRequired
+};
+
 function mapStateToProps(state) {
   return {
     cart: state.cart,
-    productList: _.filter(state.products.items, function(item) {
-      return _.some(state.cart.items, cartItem => {
+    productList: state.products.items.filter(item => {
+      return state.cart.items.some(cartItem => {
         return cartItem.id === item.id;
       });
     }),

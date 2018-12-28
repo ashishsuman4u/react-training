@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { PropTypes } from "prop-types";
 
 const Payment = props => {
   const { itemInCart, billing } = props;
@@ -21,6 +22,11 @@ const Payment = props => {
       </div>
     </Fragment>
   );
+};
+
+Payment.propTypes = {
+  itemInCart: PropTypes.number.isRequired,
+  billing: PropTypes.object.isRequired
 };
 
 const getPromoDiscountField = (currencyFormat, promoDiscount) => {

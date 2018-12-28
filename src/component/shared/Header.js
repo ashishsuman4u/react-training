@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ThemeContext from "../../context/ThemeContext";
 
-const Header = props => {
+const Header = () => {
   return (
     <ThemeContext.Consumer>
       {value => (

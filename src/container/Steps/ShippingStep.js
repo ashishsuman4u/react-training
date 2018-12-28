@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import classNames from "classnames";
 import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
 
 import renderStep from "../../component/shared/renderStep";
 import ThemeContext from "../../context/ThemeContext";
@@ -98,6 +99,10 @@ function validateInput(formValues) {
   }
   return error;
 }
+
+ShippingStep.propTypes = {
+  nextStep: PropTypes.func.isRequired
+};
 
 const ShippingStepForm = reduxForm({
   form: "address",

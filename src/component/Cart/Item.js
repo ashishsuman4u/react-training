@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { PropTypes } from "prop-types";
 
 const Item = props => {
   const imageUrl = `https://raw.githubusercontent.com/jeffersonRibeiro/react-shopping-cart/master/src/static/products/${
@@ -26,6 +27,10 @@ const Item = props => {
       </div>
     </Fragment>
   );
+};
+
+Item.propTypes = {
+  item: PropTypes.object.isRequired
 };
 
 export default Item;

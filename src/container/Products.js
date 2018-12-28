@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import _ from "lodash";
 
 import { fetchProduct, updateCurrentIndex } from "../action/product";
 import { addToCart } from "../action/cart";
@@ -44,7 +43,7 @@ class Product extends Component {
 
   getProducts = () => {
     const { dispatch } = this.props;
-    const currentPage = _.find(this.props.products.pagination, page => {
+    const currentPage = this.props.products.pagination.find(page => {
       return (
         page.pageIndex === this.state.pageIndex &&
         page.sortDirection === this.state.sortDirection &&

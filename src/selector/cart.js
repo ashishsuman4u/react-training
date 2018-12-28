@@ -1,10 +1,9 @@
 import { createSelector } from "reselect";
-import _ from "lodash";
 
 const calculatePrice = (items, counts) => {
   let total = 0;
-  _.each(items, item => {
-    const count = _.find(counts, count => {
+  items.forEach(item => {
+    const count = counts.find(count => {
       return count.id === item.id;
     });
     total += count.count * item.price;
@@ -15,7 +14,7 @@ const calculatePrice = (items, counts) => {
 const calculateDeliveryCharges = items => {
   let total = 0;
   if (
-    _.some(items, item => {
+    items.some(item => {
       return !item.isFreeShipping;
     })
   ) {
@@ -25,15 +24,15 @@ const calculateDeliveryCharges = items => {
 };
 
 const productListSelector = state =>
-  _.filter(state.products.items, function(item) {
-    return _.some(state.cart.items, cartItem => {
+  state.products.items.filter(item => {
+    return state.cart.items.some(cartItem => {
       return cartItem.id === item.id;
     });
   });
 
 export const currencyFormatSelector = createSelector(
   productListSelector,
-  products => _.first(products).currencyFormat
+  products => (products && products[0] ? products[0].currencyFormat : "")
 );
 
 const cartItemsSelector = state => state.cart.items;
