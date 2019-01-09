@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import classNames from "classnames";
+import { compose } from "redux";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 
@@ -104,15 +105,15 @@ ShippingStep.propTypes = {
   nextStep: PropTypes.func.isRequired
 };
 
-const ShippingStepForm = reduxForm({
-  form: "address",
-  validate: validateInput
-})(ShippingStep);
-
 function mapStateToProps(state) {
   return {
     initialValues: state.cart.address
   };
 }
-
-export default connect(mapStateToProps)(renderStep(ShippingStepForm));
+export default compose(
+  connect(mapStateToProps),
+  reduxForm({
+    form: "address",
+    validate: validateInput
+  })
+)(renderStep(ShippingStep));

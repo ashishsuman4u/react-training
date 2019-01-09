@@ -19,7 +19,6 @@ it("should contain Filters and Sorter", () => {
     </Store>,
     { context: { themeContext } }
   );
-
   expect(wrapped.find(FilterAndSorter).length).toEqual(1);
   wrapped.unmount();
 });

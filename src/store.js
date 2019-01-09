@@ -8,17 +8,23 @@ import reducers from "./reducer";
 import { loadState, saveState } from "./sessionStorage";
 import logger from "./middleware/loggerMiddleware";
 
-const persistentState = loadState();
-const store = createStore(
-  reducers,
-  persistentState,
-  applyMiddleware(thunk, logger)
-);
+const getInitialState = initialState => {
+  if (initialState) {
+    return initialState;
+  } else {
+    return loadState();
+  }
+};
 
-store.subscribe(() => {
-  saveState(store.getState());
-});
+export default ({ initialState, children }) => {
+  const store = createStore(
+    reducers,
+    getInitialState(initialState),
+    applyMiddleware(thunk, logger)
+  );
 
-export default props => {
-  return <Provider store={store}>{props.children}</Provider>;
+  store.subscribe(() => {
+    saveState(store.getState());
+  });
+  return <Provider store={store}>{children}</Provider>;
 };

@@ -10,7 +10,6 @@ class ErrorBoundary extends Component {
 
   render() {
     const { error, info } = this.state;
-    console.log("Error Boundary logger - ", error);
     if (error) {
       return (
         <div className="ui error message">

@@ -4,23 +4,10 @@ import PropTypes from "prop-types";
 
 export default class Modal extends React.Component {
   static propTypes = {
-    getContainer: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
-    didUpdate: PropTypes.func
+    getContainer: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    this.createContainer();
-  }
-
-  componentDidUpdate(prevProps) {
-    const { didUpdate } = this.props;
-    if (didUpdate) {
-      didUpdate(prevProps);
-    }
-  }
-
-  createContainer() {
     this._container = this.props.getContainer();
     this.forceUpdate();
   }
